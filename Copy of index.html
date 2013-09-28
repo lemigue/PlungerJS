@@ -1,0 +1,363 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>PlungerJS</title>
+	
+    <link href="Brush/shCore.css" rel="stylesheet" type="text/css" />
+    <link href="Brush/shThemeDefault.css" rel="stylesheet" type="text/css" />
+
+    <!--link rel="Stylesheet" type="text/css" href="Content/normalize.css" /-->
+    <!--link rel="Stylesheet" type="text/css" href="Content/plungerstyle-0.0.1.css" /-->
+
+</head>
+<body>
+
+    <header>
+        <hgroup>
+            <h1>PlungerJS</h1>
+            <h2>version 0.0.1</h2>
+        </hgroup>
+	</header>
+
+    <div role="main">
+        <nav>
+			<ul>
+				<li><a href="index.html">Home</a></li>
+                
+                <li><a href="#api">API</a></li>
+
+                <li><a href="#controles">Controles</a>
+                    <ul>
+                        <li><a href="#coreunobstrusive">Unobstrusive</a></li>
+                        <li><a href="#coreaction">Action</a></li>
+                        <li><a href="#coreroute">Route</a></li>
+                    </ul>
+                </li>
+
+                <li><a href="#componentes">Componentes</a>
+                    <ul>
+                        <li><a href="#modulelink">Link</a></li>
+                        <li><a href="#moduleform">Form</a></li>
+                        <li><a href="#modulepopup">PopUp</a></li>
+                        <li><a href="#modulejqueryui">JQueryUi</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#extend">Extendendo</a>
+                    <ul>
+                        <li><a href="#extendcustom">Criando Componentes</a></li>
+                        <li><a href="#extenddoc">Padrão documentação</a></li>
+                        <li><a href="#extendtest">Como testar</a></li>
+                    </ul>
+                </li>
+                <li><a href="#version">Versões</a></li>
+                <li><a href="#reference">Referências</a></li>
+			</ul>
+		</nav>
+        <section>
+            <article id="home">
+                <h2>Ideia</h2>
+                <ol>
+                    <li>Implementar o "javascript unobstrusivo".</li>
+                    <li>Diminuir as implementações em javascript.</li>
+                    <li>Acessivel à "não programadores" (designer na maioria dos casos).</li>
+                    <li>Focar na idéia de que a página, os conteúdos, possam funcionar sem o javascript.</li>
+                    <li>Aproveitar a "semântica" das tags para implementar componentes.</li>
+                    <li>O html (view) não deve conhecer o javascript</li>
+                </ol>
+                <h2>Implementação</h2>
+                <ol>
+                    <li>Explorar a ancora (#) para que ações javascript sejam executadas. Usar como base o conceito das rotas mvc do .net e outros frameworks.</li>
+                    <li>Facilidade de se criar componentes e/ou modulos </li>
+                    <li>Vinculado diretamente ao jquery</li>
+                    <li>Gerar objeto json a partir de campos de um formulário.</li>
+                    <li>Os componentes/modulos fiquem descoplados;</li>
+                    <li>Evitar que se torne uma "linguagem" de programação;</li>
+                </ol>
+                <footer>
+                    <a href="#">Voltar</a>
+                </footer>
+            </article>
+
+            <hr />
+
+            <article id="core">
+                <header>
+                    <h1>Controladores</h1>
+                </header>
+                <section>
+                    <p>Todo o desenvolvimento é baseado em pequenos componentes. O core representa alguns componentes que irão executar os outros componentes registrados.</p>
+                    <article id="coreunobstrusive">
+                        <header>
+                            <h2>Unobstrusive</h2>
+                        </header>
+                        <p>Ativa módulos que estão viculados aos elementos do html.</p>
+                        <ul>
+                            <li>Momento que será ativo estes módulos:
+                                <ol>
+                                    <li>Ao carregar a página</li>
+                                    <li>Quando adicionar conteúdo html na página atravez das seguintes comando do jquery:
+                                        <ul>
+                                            <li>html</li>
+                                        </ul>
+                                        * este métodos foram reescritos para que todo conteúdo novo que entra na página passa executar e controlador
+                                    </li>
+                                </ol>
+                            </li>
+                            <li>Registrando um modulo a este controlador:
+                                <ol>
+                                    <li>Criar um componente seguindo o padrão comum de componentes.</li>
+                                    <li>O componente deverá ter o metodo render que irá receber o elemento jquery.</li>
+                                    <li>No html incluir o parametro data-type que irá receber como valor o name do componente</li>
+                                </ol>
+                            </li>
+                        </ul>
+                        <footer>
+                            <a href="#">Voltar</a>
+                        </footer>
+                    </article>
+                    <article id="coreaction">
+                        <header>
+                            <h2>Action</h2>
+                        </header>
+                        <p>Executa ação de um módulo que está vinculado ao elemento "a" do html.</p>
+                        <footer>
+                            <a href="#">Voltar</a>
+                        </footer>
+                    </article>
+                    <article id="coreroute">
+                        <header>
+                            <h2><a>Route</a></h2>
+                        </header>
+                        <p>Gerencia os módulos vinculádos as rodatas da URL</p>
+                        <footer>
+                            <a href="#">Voltar</a>
+                        </footer>
+                    </article>  
+                </section>
+            </article>
+            <hr />
+            <article id="api">
+                <header>
+                    <h1>API</h1>
+                </header>
+            </article>
+            <hr />
+            <article id="modules">
+                <header>
+                    <h1>Modules</h1>
+                </header>
+                <section>
+                    <article id="modulelink">
+                        <header>
+                            <h2>Link</h2>
+                        </header>
+                        <p>Carregar o link dentro de um container.</p>
+                        <dl>
+                                    <dt>element</dt>
+                                        <dd>a</dd>
+                                    <dt>data-action</dt>
+                                        <dd>ajax</dd>
+                                    <dt>data-type</dt>
+                                        <dd>ajax</dd>
+                                    <dt>atributos</dt>
+                                        <dd>
+                                            <dl>
+                                                <dt>target</dt>
+                                                    <dd>
+                                                        <dl>
+                                                            <dt>_self</dt>
+                                                                <dd>quando quiser abrir no conteiner que pertence</dd>
+                                                            <dt>selector</dt>
+                                                                <dd>utilizar selector css para escolher o conteiner de destino</dd>
+                                                        </dl>
+                                                    </dd>
+                                            </dl>
+                                        </dd>
+                                </dl>
+                                    
+                            <article class="attr">
+                                <header>
+                                    <h3>Atributos</h3>
+                                </header>
+                                <dl>
+                                   <dt>target</dt> 
+                                   <dd>
+                                        <dl>
+                                            <dt>_self</dt>
+                                                <dd>quando quiser abrir no conteiner que pertence.</dd>
+                                            <dt>selector</dt>
+                                                <dd>utilizar selector css para escolher o conteiner de destino.</dd>
+                                        </dl>
+                                    </dd>
+                                    <dt>href</dt> 
+                                        <dd>URL que será carregada.</dd>
+                                    <dt>data-link-cache</dt> 
+                                        <dd>
+                                            <p>Se irá cachear ou não.</p>
+                                            <dl>
+                                                <dt>true</dt>
+                                                    <dd>valor default - retorna do cache</dd>
+                                                <dt>false</dt>
+                                                    <dd>não retorna do cache.</dd>
+                                            </dl>
+                                        </dd>
+                                </dl>
+                            </article>
+                            
+                            <article class="exemplo">
+                                <header><h3>Exemplos</h3></header>
+                                <section>
+                                    
+                                    <ul>
+                                        <li>
+                                            <details open="open">
+                                                <summary>Mesmo container</summary>
+                                                <h4>Code:</h4>
+                                                <div class="code">
+                                                <script type="syntaxhighlighter" class="brush: xml;"><![CDATA[
+                                                    <a href="exemplos/ajax/1.html" target="_self" data-action="link" data-link-cache="false">link</a>
+                                                ]]></script>
+                                                </div>
+                                                <h4>Result:</h4>
+                                                <div class="view">
+                                                    <a href="exemplos/ajax/1.html" target="_self" data-action="link" data-link-cache="false" >link</a>
+                                                </div>
+                                            </details>
+                                        </li>
+                                        <li>
+                                            <details open="open">
+                                                <summary>Outro container utilizando o selector css</summary>
+                                                <h4>Code:</h4>
+                                                <div class="code">
+                                                <script type="syntaxhighlighter" class="brush: xml;"><![CDATA[
+                                                    <a href="exemplos/ajax/1.html" target="#linkajaxExemplo2" data-action="link" >link</a>
+                                                    <div id="linkajaxExemplo2"></div>
+                                                ]]></script>
+                                                </div>
+                                                <h4>Result:</h4>
+                                                <div class="view">
+                                                    <a href="exemplos/ajax/1.html" target="#linkajaxExemplo2" data-action="link" >link</a>
+                                                    <div id="linkajaxExemplo2">Container destino</div>
+                                                </div>
+                                            </details>
+                                        </li>
+                                        <li>
+                                            <details open="open">
+                                                <summary>Automaticamente</summary>
+                                                <h4>Code:</h4>
+                                                <div class="code">
+                                                <script type="syntaxhighlighter" class="brush: xml; "><![CDATA[
+                                                    <a href="exemplos/ajax/2a.html" target="#linkajaxExemplo3a" data-action="link" data-type="ajax" >link</a>
+                                                    <div id="linkajaxExemplo3a"></div>
+                                                ]]></script>
+                                                </div>
+                                                <h4>Result:</h4>
+                                                <div class="view">
+                                                    <a href="exemplos/ajax/2.html" target="#linkajaxExemplo3a" data-action="link" >abrir exemplo</a>
+                                                    <div id="linkajaxExemplo3a"></div>
+                                                </div>
+                                            </details>
+                                        </li>
+                                        <li>
+                                            <details open="open">
+                                                <summary>Através das rotas</summary>
+                                                <h4>Code:</h4>
+                                                <div class="code">
+                                                <script type="syntaxhighlighter" class="brush: xml; "><![CDATA[
+                                                    <a href="#link/load/linkAjaxRoute">abrir exemplo</a>
+                                                    <a href="exemplos/ajax/1.html" target="#linkajaxRouteTarget" data-action="link" id="linkAjaxRoute" ></a>
+                                                    <div id="linkajaxRouteTarget"></div>
+                                                ]]></script>
+                                                </div>
+                                                <h4>Result:</h4>
+                                                <div class="view">
+                                                    <a href="#link/load/linkAjaxRoute">abrir exemplo</a>
+                                                    <a href="exemplos/ajax/1.html" target="#linkajaxRouteTarget" data-action="link" id="linkAjaxRoute" ></a>
+                                                    <div id="linkajaxRouteTarget"></div>
+                                                </div>
+                                            </details>
+                                        </li>
+                                     </ul>
+                                </section>
+                            </article>
+                        
+                        <footer>
+                            <a href="#">Voltar</a>
+                        </footer>
+                    </article>
+                </section>
+            </article>
+            <hr />
+            <article id="extend">
+                <header>
+                    <h1>Extendendo</h1>
+                </header>
+                <section>
+
+                </section>
+                <footer>
+                    <a href="#">Voltar</a>
+                </footer>
+            </article>
+
+            <hr />
+
+            <article id="reference">
+                <header>
+                    <h1>Referências</h1>
+                </header>
+                <section>
+                    <h2>Dependencias:</h2>
+                    <ol>
+                        <li><a href="http://jquery.com/" target="_blank">JQuery</a>: a princípio indispensável</li>
+                    </ol>
+                    <h2>Framework ou bibliotecas uteis:</h2>
+                    <ol>
+                        <li><a href="http://backbonejs.org/" target="_blank">Backbonejs</a>: framework q pode ser auxiliar, pois utiliza o conceito de rotas, history e sincronização </li>
+                        <li><a href="http://knockoutjs.com/" target="_blank">Knocout</a>: framework mvvm que o .net tem adotado como pradrão nos projetos </li>
+                        <li><a href="http://qunitjs.com/" target="_blank">QUnit</a>: para teste automátizado e tdd do desenvolvimento</li>
+                    </ol>
+                    <h2>Links:</h2>
+                    <ol>
+                        <li><a href="https://developers.google.com/webmasters/ajax-crawling/" target="_blank">Making AJAX applications crawlable</a>, <a href="https://support.google.com/webmasters/answer/174993?hl=pt-BR">Mais 1</a></li>
+                        <li><a href="http://www.bennadel.com/blog/2009-Using-Self-Executing-Function-Arguments-To-Override-Core-jQuery-Methods.htm" target="_blank">Override JQuery function</a></li>
+                    </ol>
+                    <h2>Consultar:</h2>
+                    <ol>
+                        <li><a href="http://lostechies.com/derickbailey/2011/09/26/seo-and-accessibility-with-html5-pushstate-part-1-introducing-pushstate/" target="_blank">pesquisar Push State</a></li>
+                        <li><a href="https://github.com/stevekwan/best-practices/blob/master/javascript/best-practices.md" target="_blank">Boas praticas</a></li>
+                        <li><a href="http://www.jslint.com/" target="_blank">qulidade</a></li>
+                        <li><a href="http://net.tutsplus.com/tutorials/javascript-ajax/24-javascript-best-practices-for-beginners/" target="_blank">Boas praticas 2</a></li>
+                        <li><a href="http://www.thinkful.com/learn/javascript-best-practices-1/Allow-for-Configuration-and-Translation" target="_blank">Boas praticas 3</a></li>
+                        <li><a href="http://www.javascripttoolbox.com/bestpractices/" target="_blank">Boas praticas 4</a></li>
+                        <li><a href="http://loopinfinito.com.br/2013/09/24/throttle-e-debounce-patterns-em-javascript/" target="_blank">Pode ser util 1</a></li>
+                        <li><a href="http://alistapart.com/article/sustainable-web-design" target="_blank">Boas praticas 5</a></li>
+                        <li><a href="http://browserdiet.com/" target="_blank">Boas praticas 6</a></li>
+                    </ol>
+                </section>
+                <footer>
+                    <a href="#">Voltar</a>
+                </footer>
+            </article>
+        </section>
+    </div>
+
+	<footer>
+	</footer>
+    
+    <script src="Scripts/jquery-2.0.3.min.js" type="text/javascript"></script>
+
+    <script type="text/javascript" src="Brush/shCore.js"></script>
+    <script type="text/javascript" src="Brush/shBrushXml.js"></script>
+
+	<script src="plungerjs-0.0.1.js" type="text/javascript"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            SyntaxHighlighter.all();
+        });
+    </script>
+
+</body>
+</html>
